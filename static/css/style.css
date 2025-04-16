@@ -1,0 +1,16 @@
+/* *{
+    background-color: rgb(29, 10, 10);
+} */
+
+
+div a {
+    text-decoration: none;
+    color: black;
+  }
+
+
+.errorlist {
+    color: red;
+    font-size: 0.9em;
+}
+

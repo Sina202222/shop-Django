@@ -1,0 +1,139 @@
+{%  extends 'base.html' %}
+
+{% block title %}HOME.HTML{% endblock %}
+
+
+
+{% block content %}
+<style>
+    .texta {
+        color: #f2f2f2;
+        
+        margin: 20rem 1rem 1rem 1rem;
+        padding: 1rem 1rem 1rem 1rem;
+      }
+
+</style>
+
+    <section  class="container m-3" >
+
+        <div><button class="btn btn-primary m-2 " >عمده فروشان</button></div>
+        <div><button class="btn btn-danger m-2" >تک فروشان  </button></div>
+      
+
+    </section>
+
+  
+<section  class="" style="  background-color: rgb(103, 103, 216);" >
+    <div class="container navbar ">
+        <form class="d-flex">
+            <input class="form-control m-2" type="text" placeholder="Search">
+            <button class="btn btn-primary input-group-text "  type="button">جست و جو</button>
+        </form>
+        <div class="text-center">
+            <p>خوش آمدید، {{ request.user.username }}!</p>
+
+        </div>
+       
+        <div class=" dropdown m-3" >
+            <button class=" dropdown-toggle btn  btn-primary"   data-bs-toggle="dropdown" href="">فیلتر</button>
+            <ul class="dropdown-menu text-end">                        
+                <li><a class="dropdown-item" href="#">جدید ترین ها</a></li>
+                <li><a class="dropdown-item" href="#">ارزان ترین ها</a></li>
+                <li><a class="dropdown-item" href="#">گران ترین ها</a></li>
+                <li><a class="dropdown-item" href="#">محبوب ترین ها</a></li>
+                <li><a class="dropdown-item" href="#">پر فروش ترین ها</a></li>
+
+
+            </ul>
+        </div>   
+    </div>
+</section>
+
+    <section  style="  background-color: rgb(85, 173, 26);">
+        <div class="container"  >
+            <div class="d-flex m-4" style="background-color: rgba(13, 184, 226, 0.651);">
+
+                <div class="   p-2 col-3 m-4  "  style="background-color: rgba(202, 125, 9, 0);">
+                    <div class="texta d-flex  mx-5 btn ">
+                        <p class="m-2">  همه محصولات </p>
+                        <div class="m-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                   
+                </div>                
+
+                    {% if products_single %}
+                        {% for products_one in products_single %}
+                            <div class="rm container p-4 col-3 m-4  border" style="background-color: rgba(201, 23, 112, 0.774);">
+                                <img class="img-thumbnail center" src="{{ products_one.image.url }}" >
+                                <div class="text">
+
+                                    <p class="mt-1"> نام محصول : {{products_one.name_product}} </p>
+                                    <p class="mt-1"> نام فروشگاه : {{products_one.name_store}} </p>
+                                    <!-- <div> بسته چند عددی : {{product.name_store}} </div> -->
+                                    <p class="mt-1"> قیمت  تومان : {{products_one.cost}} </p>
+                                    <a class="mt-1 btn " href="{% url 'detils_products_signal' %}"> اطلاعات بیشتر </a>
+
+                                    <!-- <div> تعداد باقی مانده</div>
+                                    <div> تعداد نطرات </div>
+                                    <div> میزان محبوبیت</div>
+                                    <div> تعداد رای </div> -->
+
+                                </div>    
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>محصولی برای نمایش وجود ندارد.</p>
+                    {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+
+    <section  style="  background-color: rgb(26, 72, 173);">
+        <div class="container"  >
+            <div class="d-flex m-4" style="background-color: rgb(196, 166, 33);">
+
+                <div class="   p-2 col-3 m-4  "  style="background-color: rgba(202, 125, 9, 0);">
+                    <div class="texta d-flex  mx-5 btn ">
+                        <p class="m-2">  همه محصولات </p>
+                        <div class="m-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                            </svg>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+
+                {% if products_wholesaler %}
+                    {% for products_multy in products_wholesaler %}
+                        <div class="rm container p-4 col-3 m-4 border " style="background-color: rgba(201, 23, 112, 0.774);">
+                            <img class="img-thumbnail center" src="{{ products_multy.image.url }}" >
+                            <div class="text">
+                                <p class="mt-1"> نام محصول : {{ products_multy.name_product }} </p>
+                                <p class="mt-1"> نام فروشگاه : {{ products_multy.name_store }} </p>
+                                <p class="mt-1"> قیمت تومان : {{ products_multy.cost }} </p>
+                                <a class="mt-1 btn " href="{% url 'detils_products_multy' %}"> اطلاعات بیشتر </a>
+
+                            </div>    
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>محصولی برای نمایش وجود ندارد.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+
+ 
+{% endblock content %}

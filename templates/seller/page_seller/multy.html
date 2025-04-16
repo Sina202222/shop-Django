@@ -1,0 +1,142 @@
+{%  extends 'base.html' %}
+
+{% block title %} multy.HTML {% endblock %}
+
+
+{% block content %}
+
+<section id="section1">
+    <div class="container mt-4">
+        <div>
+            <button class="btn btn-primary" onclick="toggleSectionsadd1()">
+                <span style="color: aliceblue;">اضافه محصول</span>
+            </button>
+        </div>
+        <div class="container mt-5">
+            <h4>  محصولات موجود </h4>
+            <h4>  multy </h4>
+
+        </div>
+    </div>
+
+    <div class="container"  >
+        <div class="d-flex flex-wrap">
+            {% if products_wholesaler %}
+                    {% for products in products_wholesaler %}
+                    <div class="rm container p-4 col-3 m-4 border" style="background-color: rgba(201, 23, 112, 0.774);">
+                        <img class="img-thumbnail center" src="{{ products_multy.image.url  }}">
+                        <div class="text">
+                            <p class="mt-1">نام محصول: {{ product.name_product }}</p>
+                            <p class="mt-1">نام فروشگاه: {{ product.name_store }}</p>
+                            <p class="mt-1">قیمت تومان: {{ product.cost }}</p>
+                            <a class="mt-1 btn" href="{% url 'detils_products_multy' %}">اطلاعات بیشتر</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>محصولی برای نمایش وجود ندارد.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+</section>
+
+{% if request.user.is_authenticated %}
+
+
+<section id="section2" style="display: none;">
+    <div class="container mt-5">
+        <h2 class=" ">افزودن محصول جدید</h2>
+
+            <form method="post" class="mt-3 was-validated" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group m-3 ">
+                    <label for="name_store" class="form-label">نام فروشگاه:</label>
+                    <input type="text" name="name_store" class="form-control" required>  
+                </div>
+
+                <div class="form-group m-3">
+                    <label for="category_product" class="form-label"> دسته‌بندی: </label>
+                    <input type="text" name="category_product" class="form-control" list="browsers" placeholder=" دسته بندی " required>
+                
+                    <datalist id="browsers">
+                        <option value="شلوار">
+                        <option value="پیراهن">
+                        <option value="بلو">
+                        <option value="زیر پوش">
+                        <option value="کلاه">
+                    </datalist>
+
+                    {% if product_form.name_product.errors %}
+                        <div class="alert alert-danger">
+                            {{ product_form.name_product.errors }}
+                        </div>
+                    {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group m-3">
+                    <label for="name_product" class="form-label">نام محصول:</label>
+                    <input type="text" name="name_product" class="form-control" required>
+                </div>
+
+                <div class="form-group m-3">
+                    <label for="features_product" class="form-label">ویژگی‌های محصول:</label>
+                    <textarea name="features_product" class="form-control" required></textarea>
+                </div>
+
+                <div class="form-group m-3">
+                    <label for="description" class="form-label">توضیحات:</label>
+                    <textarea name="description" class="form-control" required></textarea>
+                </div>
+
+
+                <div class="form-group m-3">
+                    <label for="image" class="form-label">بارگذاری تصویر محصول:</label>
+                    <input type="file" name="image" class="form-control" accept="images/product/" required>
+                </div>
+                
+
+                <div class="form-group m-3">
+                    <label for="cost" class="form-label"> هزینه محصول:</label>
+                    <input type="number" name="cost" class="form-control"  required>  
+                </div>
+
+                
+                
+                <button class="btn btn-primary m-3" onclick="toggleSections1()">
+                    <span style="color: aliceblue;">  اضافه کردن محصول  </span>
+                </button>
+                
+            
+            </form>
+            
+            
+    </div>
+</section>
+
+
+    
+<script>
+    function toggleSectionsadd1() {
+        var section1 = document.getElementById("section1");
+        var section2 = document.getElementById("section2");
+
+
+        // پنهان کردن بخش اول و نمایش بخش دوم
+        if (section1.style.display !== "none") {
+            section1.style.display = "none";
+            section2.style.display = "block";
+            
+
+        } else {
+            section1.style.display = "block";
+            section2.style.display = "none";
+
+        }
+    }
+</script>
+
+{% endblock content %}

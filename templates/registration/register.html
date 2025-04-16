@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %} register {% endblock %}
+
+
+
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <button type="submit">ثبت نام</button>
+</form> 
+
+{% block content %}
+ 
+<section class="m-3  " >
+    <div class="container border col-3 rm p-4  centered-container " style="background-color: rgba(126, 138, 138, 0.39); margin: 4rem  50rem ;">
+        <h2 class="mb-3 text-center">ثبت‌نام</h2>
+        {% load widget_tweaks %}
+        <form method="post" class=" was-validated p-2 " style="">
+            {% csrf_token %}
+    
+            <div class="my-2" >
+              <label for="{{ form.username.id_for_label }}" class="form-label m-1">نام کاربری</label>
+              <input type="text " name="username" id="username " class="form-control my-1  "  placeholder=" نام کاربری   "  required>
+             
+            </div>
+
+            <div class="my-2">
+              <label for="exampleInputEmail1" class="form-label m-1" > ادرس ایمیل </label>
+              <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" ایمیل خود را وارد کنید  " required>
+              <div id="emailHelp" class="form-text m-2">We'll never share your email with anyone else.</div>
+            </div>
+
+            <div class=" my-2">       
+                <label for="password1" class="m-1">رمز عبور</label>
+                <input type="password" name="password1" id="password1" class="form-control m-1 " placeholder="رمز عبور"  required>
+            </div>
+
+            <div class="my-2">
+                <label for="password2" class="m-1">تکرار رمز عبور</label>
+                <input type="password" name="password2" id="password2" class="form-control m-1 "  placeholder=" تکرار رمز عبور "  required> 
+            </div>
+
+            <div class="my-2" >
+                <label for="user_type" class="m-1" >نوع کاربر</label>
+                <select name="user_type" id="user_type" class="form-select  m-1 " required aria-label="select example" >
+                    <option value="" >---</option>
+                    <option value="buyer">خریدار</option>
+                    <option value="product_wholesaler">عمده فروش</option>
+                    <option value="product_single">تک فروش</option>
+
+                </select>
+            </div>
+
+            
+
+            <div class="form-check mt-3">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="remember"> من را به خاطر بسپار
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-success mt-4">ثبت‌نام</button>
+        </form>
+        
+    </div>
+
+    
+
+</section>
+
+
+<section >
+  
+</section>
+
+
+
+
+{% endblock content %} 

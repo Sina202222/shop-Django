@@ -1,0 +1,50 @@
+{%  extends 'base.html' %}
+
+{% block title %}seller_details{% endblock %}
+<!-- مشخصات فرو شنده  -->
+
+
+{% block content %}
+<!-- کد هایت را باید داخل این بخش بنویسی -->
+
+
+
+{% if request.user.is_authenticated %}
+
+    <section id="section2" style="display: none;">
+        <div class="container mt-5">
+            <h2> مشخصات فروشنده </h2>
+            <form method="POST" action="#">
+                {% csrf_token %}
+            
+
+                <button type="submit" class="btn btn-primary">ویرایش</button>
+            </form>
+        </div>
+    </section>
+
+{% else %}
+    <h1> لطفا برای دسترسی به این بخش وارده سایت شوید</h1>
+
+
+{% endif %}
+
+
+<script>
+    function toggleSections() {
+        var section1 = document.getElementById("section1");
+        var section2 = document.getElementById("section2");
+
+        // پنهان کردن بخش اول و نمایش بخش دوم
+        if (section1.style.display !== "none") {
+            section1.style.display = "none";
+            section2.style.display = "block";
+        } else {
+            section1.style.display = "block";
+            section2.style.display = "none";
+        }
+    }
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{%  extends 'base.html' %}
+
+{% block title %}payment_gateway{% endblock %}
+<!-- اضافه کردن درگاه پرداخت  -->
+
+
+{% block content %}
+<!-- کد هایت را باید داخل این بخش بنویسی -->
+
+
+
+
+<section id="section1">
+    <div class="container mt-4">
+        <div>
+            <button class="btn btn-primary" onclick="toggleSections()">
+                <span style="color: aliceblue;">اضافه کردن شماره کارت جدید</span>
+            </button>
+        </div>
+        <div class="container mt-5">
+            <h4>شماره کارت های موجود</h4>
+        </div>
+    </div>
+</section>
+
+    {% if request.user.is_authenticated %}
+
+        <section id="section2" style="display: none;">
+            <div class="container mt-5">
+                <h2> شماره کارت جدید </h2>
+                <form method="POST" action="#">
+                    {% csrf_token %}
+                
+
+                    <button type="submit" class="btn btn-primary">ارسال</button>
+                </form>
+            </div>
+        </section>
+
+    {% else %}
+         <h1> لطفا برای دسترسی به این بخش وارده سایت شوید</h1>
+
+
+    {% endif %}
+
+
+<script>
+    function toggleSections() {
+        var section1 = document.getElementById("section1");
+        var section2 = document.getElementById("section2");
+
+        // پنهان کردن بخش اول و نمایش بخش دوم
+        if (section1.style.display !== "none") {
+            section1.style.display = "none";
+            section2.style.display = "block";
+        } else {
+            section1.style.display = "block";
+            section2.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock %}

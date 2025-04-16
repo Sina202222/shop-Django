@@ -1,0 +1,64 @@
+{%  extends 'base.html' %}
+
+{% block title %}detils_products_signal.HTML{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+    <h2>Responsive Table</h2>
+    <p>The .table-responsive class adds a scrollbar to the table when needed:</p>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th> شماره </th>
+            <th> نام محصول </th>
+            <th> نام فروشگاه </th>
+            <th> قیمت به تومان  </th>
+            <!-- <th> کشور </th> -->
+            <!-- <th>Country</th>
+            <th>Sex</th>
+            <th>Example</th> -->
+
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+            {% if products_single %}
+
+              <td> 1 </td>
+              <td>  {{ products_one.name_store }}  </td>
+              <td>  {{ products_one.name_product }} </td>
+              <td>  {{ products_one.cost }} </td>
+              <!-- <td>New York</td>
+              <td>USA</td>
+              <td>Female</td>
+              <td>Yes</td> -->
+            {% endif %}
+       
+            {% if products_wholesaler %}
+
+              <td> 1 </td>
+              <td>  {{ products_multy.name_store }}  </td>
+              <td>  {{ products_multy.name_product }} </td>
+              <td>  {{ products_multy.cost }} </td>
+              <!-- <td>New York</td>
+              <td>USA</td>
+              <td>Female</td>
+              <td>Yes</td> -->
+            {% endif %}
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock content %}

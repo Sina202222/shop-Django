@@ -1,0 +1,42 @@
+
+
+{% load static %}
+
+
+
+
+{% block title %} Adminn {% endblock %}
+
+
+{% block content %}
+
+
+
+
+
+<!-- 
+    {% with settings=site_settings %}
+        <h1 id="site-name">
+            <img src="{{ settings.logo.url }}" alt="Your Logo" style="height: 50px;">
+            
+        </h1>
+    {% endwith %}
+    <img src="{% if site_settings.logo %}{{ site_settings.logo.url }}{% else %}{% static 'default-logo.png' %}{% endif %}" alt="لوگو"> -->
+
+ 
+    <section id="section1" >  
+        <div class="container d-flex justify-content-center align-items-center mt-4 " style="min-height: 40vh; ">
+            <form method="post" enctype="multipart/form-data" class="border col-4 p-4 was-validated rounded" style="background-color: rgba(179, 43, 43, 0.39);">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="input-group-text p-2" for="inputGroupFile02">بارگذاری لوگو</label>
+                    <input type="file" name="logo" class="form-control mt-3" id="inputGroupFile02" required>
+                </div>
+                <button type="submit" class="btn btn-primary m-2">ثبت</button>
+            </form>
+        </div> 
+
+    </section> 
+
+
+{% endblock content %}

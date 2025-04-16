@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+
+{% block title %}سبد خرید{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h2>سبد خرید</h2>
+    <p>محصولات موجود در سبد خرید شما:</p>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>شماره</th>
+            <th>نام محصول</th>
+            <th>نام فروشگاه</th>
+            <th>قیمت به تومان</th>
+            <th>تعداد</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product_id, quantity in cart.items %}
+            {% with product=products|get_item:product_id %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ product.name_product }}</td>
+                <td>{{ product.name_store }}</td>
+                <td>{{ product.cost }}</td>
+                <td>{{ quantity }}</td>
+              </tr>
+            {% endwith %}
+          {% empty %}
+            <tr>
+              <td colspan="5">سبد خرید شما خالی است.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+{% endblock content %}
